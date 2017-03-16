@@ -30,6 +30,13 @@ class cell:
 	'''
 	def __init__(self):
 		self.volume = dict()
+		self.data = dict()
+
+	'''
+	Returns dimensions of this cell.
+	'''
+	def get_dimensions(self):
+		return [dim for dim in self.volume]
 
 	'''
 	Returns start and end coordinates of this cell in given dimension as a tuple.
@@ -67,6 +74,7 @@ class cell:
 	Returns two new cells as if this cell was split in given dimension at given position.
 
 	If pos == None cell is split in middle along given dimension.
+	Doesn't copy this cell's data member to new cells.
 	'''
 	def split(self, dim, pos = None):
 		first, second = cell(), cell()

@@ -61,6 +61,7 @@ class ndgrid:
 	If pos == None cell is split in middle.
 
 	Given cell is replaced with split cells.
+	Returns split cells.
 	'''
 	def split(self, cell, dim, pos = None):
 		if not cell in self.graph:
@@ -76,6 +77,8 @@ class ndgrid:
 			raise ValueError('Given position not within cell')
 
 		first, second = cell.split(dim, pos)
+		first.data = cell.data.copy()
+		second.data = cell.data.copy()
 
 		self.graph.add_node(first)
 		self.graph.add_node(second)
@@ -97,3 +100,4 @@ class ndgrid:
 			else:
 				self.graph.add_edge(neigh, second)
 				self.graph.add_edge(neigh, first)
+		return first, second
