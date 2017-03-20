@@ -105,5 +105,18 @@ class test_ndgrid(unittest.TestCase):
 			self.assertTrue(ext2[1] == 15 or ext2[1] == 20)
 
 
+	def test_remove(self):
+		c = cell.cell()
+		c.set_extent(0, -1, 1)
+		c.set_extent(3, -1, 1)
+		g = ndgrid.ndgrid(c)
+		g.split(c, 0)
+		for c in g.get_cells():
+			g.split(c, 3)
+		g.remove(g.get_cells()[0])
+		self.assertEqual(len(g.get_cells()), 3)
+		self.assertEqual(len(g.get_neighbors(g.get_cells()[0])), 2)
+
+
 if __name__ == '__main__':
 	unittest.main()

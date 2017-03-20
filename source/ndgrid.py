@@ -101,3 +101,12 @@ class ndgrid:
 				self.graph.add_edge(neigh, second)
 				self.graph.add_edge(neigh, first)
 		return first, second
+
+
+	'''
+	Removes given cell from grid and all edges leading to and from it.
+	'''
+	def remove(self, cell):
+		if not cell in self.graph:
+			return
+		self.graph.remove_node(cell)
