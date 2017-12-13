@@ -115,7 +115,11 @@ class test_ndgrid(unittest.TestCase):
 			g.split(c, 3)
 		g.remove(g.get_cells()[0])
 		self.assertEqual(len(g.get_cells()), 3)
-		self.assertEqual(len(g.get_neighbors(g.get_cells()[0])), 2)
+		nr_neighbors = []
+		for c in g.get_cells():
+			nr_neighbors.append(len(g.get_neighbors(c)))
+		nr_neighbors.sort()
+		self.assertEqual(nr_neighbors, [1, 1, 2])
 
 
 if __name__ == '__main__':
