@@ -68,7 +68,7 @@ class ndgrid:
 	Returns a list of all grid cells.
 	'''
 	def get_cells(self):
-		return self.graph.nodes()
+		return list(self.graph.nodes())
 
 
 	'''
