@@ -39,6 +39,32 @@ class ndgrid:
 
 
 	'''
+	Returns cell(s) at given position or empty list
+
+	If all_extents_must_match = False returns all
+	cells that overlap pos in extents common with pos.
+	'''
+	def get_cell(self, pos, all_extents_must_match = True):
+		found_cells = []
+		for c in self.graph.nodes():
+			exts = c.get_extents()
+			found = True
+			for ext in exts:
+				if not ext in pos:
+					if all_extents_must_match:
+						found = False
+						break
+					else:
+						continue
+				if pos[ext] < exts[ext][0] or pos[ext] >= exts[ext][1]:
+					found = False
+					break
+			if found:
+				found_cells.append(c)
+		return found_cells
+
+
+	'''
 	Returns a list of all grid cells.
 	'''
 	def get_cells(self):
