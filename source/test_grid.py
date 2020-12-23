@@ -71,7 +71,7 @@ class test_ndgrid(unittest.TestCase):
 		for c in cells:
 			self.assertIn(dim, c.volume)
 			self.assertNotIn(0, c.volume)
-			self.assertTrue(len(g.get_neighbors(c)) <= 2)
+			self.assertTrue(len(list(g.get_neighbors(c))) <= 2)
 			self.assertTrue(c.get_extent(dim)[0] < +1)
 			self.assertTrue(c.get_extent(dim)[1] > -1)
 
@@ -96,7 +96,7 @@ class test_ndgrid(unittest.TestCase):
 		cells = g.get_cells()
 		self.assertEqual(len(cells), 4)
 		for c in cells:
-			self.assertTrue(len(g.get_neighbors(c)) <= 2)
+			self.assertTrue(len(list(g.get_neighbors(c))) <= 2)
 			ext1 = c.get_extent(dim1)
 			self.assertTrue(ext1[0] == -3 or ext1[0] == 0)
 			self.assertTrue(ext1[1] == 0 or ext1[1] == +3)
@@ -117,7 +117,7 @@ class test_ndgrid(unittest.TestCase):
 		self.assertEqual(len(g.get_cells()), 3)
 		nr_neighbors = []
 		for c in g.get_cells():
-			nr_neighbors.append(len(g.get_neighbors(c)))
+			nr_neighbors.append(len(list(g.get_neighbors(c))))
 		nr_neighbors.sort()
 		self.assertEqual(nr_neighbors, [1, 1, 2])
 
